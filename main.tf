@@ -46,7 +46,7 @@ data "aws_route53_zone" "domain" {
 resource "aws_route53_record" "dns_record" {
   count   = length(var.instances)
   zone_id = data.aws_route53_zone.domain.zone_id
-  name    = "${var.ENV}-${element(var.instances, count.index ).${var.DOMAIN_NAME}}"
+  name    = "${var.ENV}-${element(var.instances, count.index )}.${var.DOMAIN_NAME}"
   type    = "A"
   ttl     = 30
   records = [element(aws_instance.ec2.*.private_ip, count.index )]
