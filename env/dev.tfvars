@@ -10,3 +10,6 @@ instances = [
   "rabbitmq",
   "redis"
 ]
+
+DOMAIN_NAME = "devops-d.online"
+ENV = "dev"
