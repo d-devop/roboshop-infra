@@ -2,5 +2,8 @@
 
 env.COMPONENT = "roboshop-infra"
 env.REPO_URL = "https://github.com/d-devop/roboshop-infra"
+env.ENVIRONMENT = "dev"
+env.ACTION = "apply"
+
 terraform()
 
