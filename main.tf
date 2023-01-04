@@ -13,3 +13,40 @@ module "vpc" {
   subnet_azs                = each.value.subnet_azs
 }
 
+module "docdb" {
+  source     = "github.com/d-devop/tf-module-docdb"
+  env        = var.env
+  kms_key_id = var.kms_key_id
+
+  for_each                = var.docdb
+  engine                  = each.value.engine
+  backup_retention_period = each.value.backup_retention_period
+  preferred_backup_window = each.value.preferred_backup_window
+  skip_final_snapshot     = each.value.skip_final_snapshot
+  storage_encrypted       = each.value.storage_encrypted
+  instance_count          = each.value.instance_count
+  instance_class          = each.value.instance_class
+
+  vpc = module.vpc
+}
+
+module "rds" {
+  source     = "github.com/d-devop/tf-module-rds"
+  env        = var.env
+  kms_key_id = var.kms_key_id
+
+  for_each                = var.rds
+  engine                  = each.value.engine
+  backup_retention_period = each.value.backup_retention_period
+  preferred_backup_window = each.value.preferred_backup_window
+  skip_final_snapshot     = each.value.skip_final_snapshot
+  storage_encrypted       = each.value.storage_encrypted
+  engine_version          = each.value.engine_version
+  dbname                  = each.value.dbname
+
+  vpc = module.vpc
+}
+
+output "vpc" {
+  value = module.vpc
+}
