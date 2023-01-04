@@ -12,3 +12,4 @@ module "vpc" {
   db_subnet_cidr_block      = each.value.db_subnet_cidr_block
   subnet_azs                = each.value.subnet_azs
 }
+
