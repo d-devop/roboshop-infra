@@ -4,6 +4,7 @@ module "vpc" {
   default_vpc_id          = var.default_vpc_id
   default_vpc_cidr_block  = var.default_vpc_cidr_block
   default_vpc_route_table = var.default_vpc_route_table
+  workstation_ip          = var.workstation_ip
 
   for_each                  = var.vpc
   vpc_cidr_block            = each.value.vpc_cidr_block
@@ -50,3 +51,17 @@ module "rds" {
 output "vpc" {
   value = module.vpc
 }
+
+//module "elasticache" {
+//  source     = "github.com/d-devop/tf-module-elasticache"
+//  env        = var.env
+//  kms_key_id = var.kms_key_id
+//
+//  for_each        = var.rds
+//  engine          = each.value.engine
+//  engine_version  = each.value.engine_version
+//  num_cache_nodes = each.value.num_cache_nodes
+//  instance_class  = each.value.instance_class
+//
+//  vpc = module.vpc
+//}
