@@ -4,6 +4,7 @@ env = "dev"
 default_vpc_id          = "vpc-0ddef4631bb569f76"
 default_vpc_cidr_block  = "172.31.0.0/16"
 default_vpc_route_table = "rtb-06b395b4f795af796"
+workstation_ip          = "172.31.13.253/32"
 
 ## KMS Information
 kms_key_id = "arn:aws:kms:us-east-1:136168207246:key/1cebfdbf-b316-40e5-9cae-ab412e6ff733"
