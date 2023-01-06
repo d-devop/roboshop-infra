@@ -53,16 +53,39 @@ output "vpc" {
   value = module.vpc
 }
 
-//module "elasticache" {
-//  source     = "github.com/d-devop/tf-module-elasticache"
-//  env        = var.env
-//  kms_key_id = var.kms_key_id
-//
-//  for_each        = var.rds
-//  engine          = each.value.engine
-//  engine_version  = each.value.engine_version
-//  num_cache_nodes = each.value.num_cache_nodes
-//  instance_class  = each.value.instance_class
-//
-//  vpc = module.vpc
-//}
+module "elasticache" {
+  source     = "github.com/d-devop/tf-module-elasticache"
+  env        = var.env
+
+  for_each        = var.rds
+  engine          = each.value.engine
+  engine_version  = each.value.engine_version
+  num_cache_nodes = each.value.num_cache_nodes
+  node_type       = each.value.node_type
+  az_mode         = each.value.az_mode
+
+  vpc = module.vpc
+}
+
+module "rabbitmq" {
+  source = "github.com/d-devop/tf-module-rabbitmq"
+  env    = var.env
+
+  for_each      = var.rabbitmq
+  instance_type = each.value.instance_type
+
+  vpc = module.vpc
+}
+
+module "app" {
+  source         = "github.com/d-devop/tf-module-mutable-app"
+  env            = var.env
+  allow_ssh_cidr = var.allow_ssh_cidr
+
+  for_each       = var.app
+  instance_type  = each.value.instance_type
+  instance_count = each.value.instance_count
+  component      = each.value.component
+
+  vpc = module.vpc
+}
