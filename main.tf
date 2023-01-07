@@ -6,12 +6,12 @@ module "vpc" {
   default_vpc_route_table = var.default_vpc_route_table
   workstation_ip          = var.workstation_ip
 
-  for_each                  = var.vpc
-  vpc_cidr_block            = each.value.vpc_cidr_block
-  public_subnet_cidr_block  = each.value.public_subnet_cidr_block
-  app_subnet_cidr_block     = each.value.app_subnet_cidr_block
-  db_subnet_cidr_block      = each.value.db_subnet_cidr_block
-  subnet_azs                = each.value.subnet_azs
+  for_each                 = var.vpc
+  vpc_cidr_block           = each.value.vpc_cidr_block
+  public_subnet_cidr_block = each.value.public_subnet_cidr_block
+  app_subnet_cidr_block    = each.value.app_subnet_cidr_block
+  db_subnet_cidr_block     = each.value.db_subnet_cidr_block
+  subnet_azs               = each.value.subnet_azs
 }
 
 module "docdb" {
@@ -46,16 +46,14 @@ module "rds" {
   dbname                  = each.value.dbname
   instance_count          = each.value.instance_count
   instance_class          = each.value.instance_class
+
   vpc = module.vpc
 }
 
-output "vpc" {
-  value = module.vpc
-}
 
 module "elasticache" {
-  source     = "github.com/d-devop/tf-module-elasticache"
-  env        = var.env
+  source = "github.com/d-devop/tf-module-elasticache"
+  env    = var.env
 
   for_each        = var.elasticache
   engine          = each.value.engine
@@ -66,6 +64,7 @@ module "elasticache" {
 
   vpc = module.vpc
 }
+
 
 module "rabbitmq" {
   source = "github.com/d-devop/tf-module-rabbitmq"
@@ -82,10 +81,25 @@ module "app" {
   env            = var.env
   allow_ssh_cidr = var.allow_ssh_cidr
 
-  for_each       = var.app
-  instance_type  = each.value.instance_type
-  instance_count = each.value.instance_count
-  component      = each.value.component
+  for_each         = var.app
+  instance_type    = each.value.instance_type
+  component        = each.value.component
+  desired_capacity = each.value.desired_capacity
+  max_size         = each.value.max_size
+  min_size         = each.value.min_size
+  app_port         = each.value.app_port
+
+  vpc = module.vpc
+}
+
+
+module "alb" {
+  source = "github.com/d-devop/tf-module-alb"
+  env    = var.env
+
+  for_each = var.alb
+  name     = each.value.name
+  internal = each.value.internal
 
   vpc = module.vpc
 }
