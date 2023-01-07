@@ -8,3 +8,7 @@ variable "docdb" {}
 variable "kms_key_id" {}
 variable "workstation_ip" {}
 variable "rds" {}
+variable "elasticache" {}
+variable "rabbitmq" {}
+variable "allow_ssh_cidr" {}
+variable "app" {}
