@@ -70,4 +70,3 @@ app = {
     instance_count = 1
   }
 }
-
