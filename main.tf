@@ -69,6 +69,7 @@ module "elasticache" {
 module "rabbitmq" {
   source = "github.com/d-devop/tf-module-rabbitmq"
   env    = var.env
+  domain = var.domain
 
   for_each      = var.rabbitmq
   instance_type = each.value.instance_type
@@ -77,9 +78,11 @@ module "rabbitmq" {
 }
 
 module "app" {
+  depends_on     = [module.docdb, module.rds, module.rabbitmq, module.elasticache]
   source         = "github.com/d-devop/tf-module-mutable-app"
   env            = var.env
   allow_ssh_cidr = var.allow_ssh_cidr
+  domain         = var.domain
 
   for_each         = var.app
   instance_type    = each.value.instance_type
@@ -88,6 +91,7 @@ module "app" {
   max_size         = each.value.max_size
   min_size         = each.value.min_size
   app_port         = each.value.app_port
+  lb_rule_priority = each.value.lb_rule_priority
 
   vpc = module.vpc
   load_balancers = module.alb
