@@ -90,6 +90,7 @@ module "app" {
   app_port         = each.value.app_port
 
   vpc = module.vpc
+  load_balancers = module.alb
 }
 
 
