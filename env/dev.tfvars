@@ -10,6 +10,9 @@ allow_ssh_cidr          = ["172.31.13.253/32"]
 ## KMS Information
 kms_key_id = "arn:aws:kms:us-east-1:136168207246:key/1cebfdbf-b316-40e5-9cae-ab412e6ff733"
 
+## Route53 Info
+domain = "devops-d.online"
+
 ## VPC
 
 vpc = {
@@ -72,6 +75,43 @@ app = {
     max_size         = 1
     min_size         = 1
     app_port         = 8080
+    lb_rule_priority = 101
+  }
+  user = {
+    component        = "user"
+    instance_type    = "t3.micro"
+    desired_capacity = 1
+    max_size         = 1
+    min_size         = 1
+    app_port         = 8080
+    lb_rule_priority = 102
+  }
+  cart = {
+    component        = "cart"
+    instance_type    = "t3.micro"
+    desired_capacity = 1
+    max_size         = 1
+    min_size         = 1
+    app_port         = 8080
+    lb_rule_priority = 103
+  }
+  shipping = {
+    component        = "shipping"
+    instance_type    = "t3.micro"
+    desired_capacity = 1
+    max_size         = 1
+    min_size         = 1
+    app_port         = 8080
+    lb_rule_priority = 104
+  }
+  payment = {
+    component        = "payment"
+    instance_type    = "t3.micro"
+    desired_capacity = 1
+    max_size         = 1
+    min_size         = 1
+    app_port         = 8080
+    lb_rule_priority = 105
   }
   frontend = {
     component        = "frontend"
@@ -87,5 +127,10 @@ alb = {
   public = {
     name     = "public-alb"
     internal = false
+  }
+  private = {
+   name     = "private-alb"
+   internal = true
+
   }
 }
