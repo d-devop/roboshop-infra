@@ -82,6 +82,7 @@ module "app" {
   source         = "github.com/d-devop/tf-module-mutable-app"
   env            = var.env
   allow_ssh_cidr = var.allow_ssh_cidr
+  allow_monitor_cidr = var.allow_monitor_cidr
   domain         = var.domain
 
   for_each         = var.app
