@@ -18,11 +18,11 @@ domain = "devops-d.online"
 
 vpc = {
   dev = {
-    vpc_cidr_block            = "10.0.0.0/16"
-    public_subnet_cidr_block  = ["10.0.0.0/24", "10.0.1.0/24"]
-    app_subnet_cidr_block     = ["10.0.2.0/24", "10.0.3.0/24"]
-    db_subnet_cidr_block      = ["10.0.4.0/24", "10.0.5.0/24"]
-    subnet_azs                = ["us-east-1a", "us-east-1b"]
+    vpc_cidr_block           = "10.0.0.0/16"
+    public_subnet_cidr_block = ["10.0.0.0/24", "10.0.1.0/24"]
+    app_subnet_cidr_block    = ["10.0.2.0/24", "10.0.3.0/24"]
+    db_subnet_cidr_block     = ["10.0.4.0/24", "10.0.5.0/24"]
+    subnet_azs               = ["us-east-1a", "us-east-1b"]
   }
 }
 
@@ -121,6 +121,7 @@ app = {
     max_size         = 1
     min_size         = 1
     app_port         = 80
+    lb_rule_priority = 100
   }
 }
 
@@ -130,7 +131,7 @@ alb = {
     internal = false
   }
   private = {
-   name     = "private-alb"
-   internal = true
+    name     = "private-alb"
+    internal = true
   }
 }
