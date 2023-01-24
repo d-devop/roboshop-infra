@@ -50,7 +50,6 @@ module "rds" {
   vpc = module.vpc
 }
 
-
 module "elasticache" {
   source = "github.com/d-devop/tf-module-elasticache"
   env    = var.env
@@ -65,7 +64,6 @@ module "elasticache" {
   vpc = module.vpc
 }
 
-
 module "rabbitmq" {
   source = "github.com/d-devop/tf-module-rabbitmq"
   env    = var.env
@@ -78,12 +76,12 @@ module "rabbitmq" {
 }
 
 module "app" {
-  depends_on     = [module.docdb, module.rds, module.rabbitmq, module.elasticache]
-  source         = "github.com/d-devop/tf-module-mutable-app"
-  env            = var.env
-  allow_ssh_cidr = var.allow_ssh_cidr
+  depends_on         = [module.docdb, module.rds, module.rabbitmq, module.elasticache]
+  source             = "github.com/d-devop/tf-module-mutable-app"
+  env                = var.env
+  allow_ssh_cidr     = var.allow_ssh_cidr
   allow_monitor_cidr = var.allow_monitor_cidr
-  domain         = var.domain
+  domain             = var.domain
 
   for_each         = var.app
   instance_type    = each.value.instance_type
@@ -97,7 +95,6 @@ module "app" {
   vpc = module.vpc
   load_balancers = module.alb
 }
-
 
 module "alb" {
   source = "github.com/d-devop/tf-module-alb"
