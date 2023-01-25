@@ -3,7 +3,7 @@ env = "prod"
 ## Default VPC Information
 default_vpc_id          = "vpc-0ddef4631bb569f76"
 default_vpc_cidr_block  = "172.31.0.0/16"
-default_vpc_route_table = "rtb-06b395b4f795af796"
+default_vpc_route_table = "rtb-05efc13934ff6c3dd"
 workstation_ip          = "172.31.13.253/32"
 allow_ssh_cidr          = ["172.31.13.253/32"]
 
