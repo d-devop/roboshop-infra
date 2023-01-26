@@ -6,7 +6,7 @@ default_vpc_cidr_block  = "172.31.0.0/16"
 default_vpc_route_table = "rtb-05efc13934ff6c3dd"
 workstation_ip          = "172.31.13.253/32"
 allow_ssh_cidr          = ["172.31.13.253/32"]
-allow_monitor_cidr      = ["172.31.12.174/32"]
+allow_monitor_cidr      = ["172.31.10.17/32"]
 
 ## KMS Information
 kms_key_id = "arn:aws:kms:us-east-1:136168207246:key/1cebfdbf-b316-40e5-9cae-ab412e6ff733"
