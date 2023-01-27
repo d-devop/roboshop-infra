@@ -82,6 +82,7 @@ module "app" {
   allow_ssh_cidr     = var.allow_ssh_cidr
   allow_monitor_cidr = var.allow_monitor_cidr
   domain             = var.domain
+  acm_cert_arn       = var.acm_cert_arn
 
   for_each         = var.app
   instance_type    = each.value.instance_type
@@ -94,6 +95,7 @@ module "app" {
 
   vpc = module.vpc
   load_balancers = module.alb
+
 }
 
 module "alb" {

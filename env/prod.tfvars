@@ -9,7 +9,8 @@ allow_ssh_cidr          = ["172.31.13.253/32"]
 allow_monitor_cidr      = ["172.31.10.17/32"]
 
 ## KMS Information
-kms_key_id = "arn:aws:kms:us-east-1:136168207246:key/1cebfdbf-b316-40e5-9cae-ab412e6ff733"
+kms_key_id   = "arn:aws:kms:us-east-1:136168207246:key/1cebfdbf-b316-40e5-9cae-ab412e6ff733"
+acm_cert_arn = "arn:aws:acm:us-east-1:136168207246:certificate/820d8238-d996-4aef-bfef-ea0050246b70"
 
 ## Route53 Info
 domain = "devops-d.online"
